@@ -15,7 +15,7 @@ class Register extends Component {
     uiConfig = {
         signInFlow: "popup",
         signInOptions: [
-            firebase.auth.FacebookAuthProvider.PROVIDER_ID
+            firebase.auth.FacebookAuthProvider.PROVIDER_ID,
         ],
         callback: {
             signInSuccess: () => false
@@ -52,9 +52,11 @@ class Register extends Component {
 
                 {this.state.isSigndIn ? (
                     <span>
-                        <div>Signed In!</div>
-                        <h1>Welcome {firebase.auth().currentUser.displayName}</h1>
-                        <img alt="profile picture" src={firebase.auth().currentUser.photoURL}/>
+                        <h1>Signed In!</h1>
+                        <h1>FaceBook: {firebase.auth().currentUser.displayName}</h1>
+                        <h1>Email: {firebase.auth().currentUser.email}</h1>
+                        <br></br>
+                        <img class="profile" alt="profile picture" src={firebase.auth().currentUser.photoURL + "?height=500"}/>
                     </span>
                 ) : (
                     <StyledFirebaseAuth

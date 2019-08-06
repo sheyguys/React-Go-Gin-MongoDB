@@ -5,9 +5,16 @@ Form {
     background-color: #282c34;
     color: white;
     padding: 40px;
-    font-family: Impact;
+    font-family: Courier;
   }
 
 h1 {
     text-align: center;
+    font-size: 10px;
+}
+
+.profile {
+    margin-left: 650px;
+    max-width: 500px;
+    max-height: 500px;
 }
