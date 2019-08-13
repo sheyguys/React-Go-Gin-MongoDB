@@ -4,13 +4,16 @@ import (
 	"github.com/globalsign/mgo/bson"
 )
 
-type HeroInfo struct {
-	Hero []Hero `json:"hero"`
+type MemberInfo struct {
+	Member []Member `json:"member"`
 }
 
-type Hero struct {
-	HeroID   bson.ObjectId `json:"hero_id" bson:"_id,omitempty"`
-	HeroName string        `json:"hero_name" bson:"hero_name"`
-	HeroType string        `json:"hero_type" bson:"hero_type"`
-	Winrate  int           `json:"winrate" bson:"winrate"`
+type Member struct {
+	MemberID      bson.ObjectId `json:"mamber_id" bson:"_id,omitempty"`
+	MemberNameeng string        `json:"member_name_eng" bson:"member_name_eng"`
+	MemberNameth  string        `json:"member_name_th" bson:"member_name_th"`
+	MemberIdcard  string        `json:"member_idcard" bson:"member_idcard"`
+	MemberPhone   string        `json:"member_phone" bson:"member_phone"`
+	MemberAddress string        `json:"member_address" bson:"member_address"`
+	MemberEmail   string        `json:"member_email" bson:"member_email"`
 }

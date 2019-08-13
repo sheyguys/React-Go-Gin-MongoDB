@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/sheyguys/gogin/route"
 	"log"
+
+	"github.com/sheyguys/gogin/route"
 
 	"github.com/gin-gonic/gin"
 
@@ -10,8 +11,8 @@ import (
 )
 
 const (
-	mongoDBEnPint  = "mongodb://localhost:27017"
-	portWebServie = ":3000"
+	mongoDBEnPint = "mongodb://localhost:27017"
+	portWebServie = ":4000"
 )
 
 func main() {
@@ -20,6 +21,6 @@ func main() {
 		log.Panic("Can no connect Database", err.Error())
 	}
 	router := gin.Default()
-	route.NewRouteHero(router, connectionDB)
+	route.NewRouteMember(router, connectionDB)
 	router.Run(portWebServie)
 }

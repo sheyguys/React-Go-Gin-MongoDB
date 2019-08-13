@@ -9,12 +9,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func NewRouteHero(route *gin.Engine, connectionDB *mgo.Session) {
-	heroRepository := repository.HeroRepositoryMongo{
+func NewRouteMember(route *gin.Engine, connectionDB *mgo.Session) {
+	memberRepository := repository.MemberRepositoryMongo{
 		ConnectionDB: connectionDB,
 	}
-	heroAPI := api.HeroAPI{
-		HeroRepository: &heroRepository,
+	memberAPI := api.MemberAPI{
+		MemberRepository: &memberRepository,
 	}
-	route.GET("dota2", heroAPI.HeroListHandler)
+	route.GET("employee", memberAPI.MemberListHandler)
+	route.POST("employee", memberAPI.AddMemberHandeler)
+	route.PUT("employee/:product_id", memberAPI.EditMemberNameHandler)
 }
