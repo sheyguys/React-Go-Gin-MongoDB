@@ -26,7 +26,7 @@ func (api MemberAPI) MemberListHandler(context *gin.Context) {
 	context.JSON(http.StatusOK, memberInfo)
 }
 
-func (api MemberAPI) AddMemberHandeler(context *gin.Context) {
+func (api MemberAPI) SaveMemberHandeler(context *gin.Context) {
 	var member model.Member
 	err := context.ShouldBindJSON(&member)
 	if err != nil {

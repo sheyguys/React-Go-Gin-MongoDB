@@ -65,13 +65,25 @@ class Register extends Component {
                     />
                 )}
 
-                <Form.Group controlId="formBasicChecbox">
-                    <Form.Check type="checkbox" label="Accept" />
+                <Form.Group controlId="formPhone">
+                    <Form.Label>Phone</Form.Label>
+                    <Form.Control type="phone" placeholder="Enter phone" />
                 </Form.Group>
 
-                <Button variant="primary" type="Confirm">
+                <Form.Group controlId="formAddress">
+                    <Form.Label>Address</Form.Label>
+                    <Form.Control type="address" placeholder="Enter address" />
+                </Form.Group>
+
+                {/* <Form.Group controlId="formBasicChecbox">
+                    <Form.Check type="checkbox" label="Accept" />
+                </Form.Group> */}
+                <center>
+                <Button class="butt" variant="primary" type="Confirm">
                     Confirm
                 </Button>
+                </center>
+                
             </Form>
     </div>
     )

@@ -33,6 +33,6 @@ func (memberMongo MemberRepositoryMongo) AddMember(member model.Member) error {
 
 func (memberMongo MemberRepositoryMongo) EditMemberName(memberID string, member model.Member) error {
 	objectID := bson.ObjectIdHex(memberID)
-	newName := bson.M{"$set": bson.M{"member_name": member.MemberName}}
+	newName := bson.M{"$set": bson.M{"member_name_th": member.MemberNameth}}
 	return memberMongo.ConnectionDB.DB(DBName).C(collection).UpdateId(objectID, newName)
 }
