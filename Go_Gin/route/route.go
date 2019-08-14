@@ -17,6 +17,7 @@ func NewRouteMember(route *gin.Engine, connectionDB *mgo.Session) {
 		MemberRepository: &memberRepository,
 	}
 	route.GET("employee", memberAPI.MemberListHandler)
-	route.POST("employee", memberAPI.SaveMemberHandeler)
-	route.PUT("employee/:product_id", memberAPI.EditMemberNameHandler)
+	route.POST("employee", memberAPI.AddMemberHandeler)
+	route.PUT("employee/:member_id", memberAPI.EditMemberNameHandler)
+	route.DELETE("employee/:member_id", memberAPI.DeleteMemberHandler)
 }

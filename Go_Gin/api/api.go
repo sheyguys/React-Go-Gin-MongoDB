@@ -26,7 +26,7 @@ func (api MemberAPI) MemberListHandler(context *gin.Context) {
 	context.JSON(http.StatusOK, memberInfo)
 }
 
-func (api MemberAPI) SaveMemberHandeler(context *gin.Context) {
+func (api MemberAPI) AddMemberHandeler(context *gin.Context) {
 	var member model.Member
 	err := context.ShouldBindJSON(&member)
 	if err != nil {
@@ -59,4 +59,14 @@ func (api MemberAPI) EditMemberNameHandler(context *gin.Context) {
 		return
 	}
 	context.JSON(http.StatusOK, gin.H{"status": "susess"})
+}
+
+func (api MemberAPI) DeleteMemberHandler(context *gin.Context) {
+	memberID := context.Param("member_id")
+	err := api.MemberRepository.DeleteMemberByID(memberID)
+	if err != nil {
+		log.Println("error DeleteMemberHandler", err.Error())
+		context.JSON(http.StatusInternalServerError, gin.H{"message": err.Error()})
+	}
+	context.JSON(http.StatusNoContent, gin.H{"message": "susess"})
 }
