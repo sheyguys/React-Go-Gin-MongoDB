@@ -2,16 +2,51 @@ package api_test
 
 import (
 	"bytes"
-	"github.com/sheyguys/gogin/api"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
+	"github.com/sheyguys/gogin/api"
+
 	"github.com/gin-gonic/gin"
 
 	"github.com/stretchr/testify/assert"
 )
+
+type Member struct {
+	MemberID       string
+	MemberNameeng  string
+	MemberNameth   string 
+	MemberIdcard   int   
+	MemberPhone    string 
+	MemberAddress  string
+	MemberEmail    string 
+	MemberFacebook string 
+}
+
+func TestMemberListHandler(t *testing.T) {
+	assert.Equal(t, Member{
+		MemberID:       "5beaf7bd62e63844ce22cc57",
+		MemberNameeng:  "Kasinan Rordthab",
+		MemberNameth:   "กษิติ์นันท์ รอดทัพ",
+		MemberIdcard:   1478523695461,
+		MemberPhone:    "0925797702",
+		MemberAddress:  "Suranaree University",
+		MemberEmail:    "b5920914@gmail.com",
+		MemberFacebook: "Ping Kasinan",
+		
+	}, Member{
+		MemberID:       "5beaf7bd62e63844ce22cc58",
+		MemberNameeng:  "Chatcha Kummoon",
+		MemberNameth:   "ฌัชชา คำมูล",
+		MemberIdcard:   1234567890123,
+		MemberPhone:    "0923456789",
+		MemberAddress:  "Suranaree University",
+		MemberEmail:    "b5922491@gmail.com",
+		MemberFacebook: "Gate Up",
+	}, "they should be equal")
+}
 
 func Test_MemberListHandler_Should_Be_MemberInfo(t *testing.T) {
 	expected := listMember
