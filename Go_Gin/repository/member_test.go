@@ -102,4 +102,3 @@ func Test_DeleteMemberByID_Input_Id_5befe40d9c71fe169a4341df_Should_Be_Deleted(t
 		t.Error("Con not delete member", actua.Error())
 	}
 }
-

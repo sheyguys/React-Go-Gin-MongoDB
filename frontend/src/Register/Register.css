@@ -11,14 +11,6 @@ Form {
 h1 {
     text-align: center;
     font-size: 10px;
+    text-shadow: 3px 2px black;
 }
 
-.profile {
-    margin-left: 650px;
-    max-width: 500px;
-    max-height: 500px;
-}
-
-.butt {
-    margin: 0 auto;
-}

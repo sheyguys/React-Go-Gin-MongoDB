@@ -11,7 +11,18 @@ firebase.initializeApp({
 })
 
 class Register extends Component {
-    state = { isSigndIn: false}
+
+    state = { 
+        isSigndIn: false,
+        member_name_th: '',
+        member_name_eng: '',
+        member_idcard: Number,
+        member_facebook: '',
+        member_email: '',
+        member_address: '',
+        member_phone: '',
+    };
+    
     uiConfig = {
         signInFlow: "popup",
         signInOptions: [
@@ -20,14 +31,58 @@ class Register extends Component {
         callback: {
             signInSuccess: () => false
         }
-    }
+    };
 
     componentDidMount = () => {
 
         firebase.auth().onAuthStateChanged(user =>{
             this.setState({isSigndIn:!!user})
         })
-    }
+    };
+
+    handleChangeMemberTHname  = event => {
+        this.setState({ MemberTHname: event.target.value });
+    };
+
+    handleChangeMemberENname  = event => {
+        this.setState({ MemberENname: event.target.value });
+    };
+
+    handleChangeMemberIDcard  = event => {
+        this.setState({ MemberIDcard: parseInt(event.target.value) });
+    };
+
+    handleChangeMemberAddress  = event => {
+        this.setState({ MemberAddress : event.target.value });
+    };
+
+    handleChangeMemberPhone  = event => {
+        this.setState({  MemberPhone: event.target.value });
+    };
+
+    handleSubmit = event => {
+        event.preventDefault();
+            const Member = {
+                member_name_th: this.state.MemberTHname,
+                member_name_eng: this.state.MemberENname,
+                member_idcard: this.state.MemberIDcard,
+                member_facebook: firebase.auth().currentUser.displayName,
+                member_email: firebase.auth().currentUser.email,
+                member_address: this.state.MemberAddress,
+                member_phone: this.state.MemberPhone
+            };
+
+        fetch('http://localhost:8081/employee', {
+            method: 'POST', // or 'PUT'
+            mode: 'no-cors',
+            body: JSON.stringify(Member), // data can be `string` or {object}!
+        }).then(res => res.json())
+            .then(response =>
+                console.log('Success:', JSON.stringify(Member))
+            )
+            .catch(error => console.error('Error:', error));
+            console.log("Data : ",Member)
+    };
 
     render(){
     return (
@@ -35,28 +90,24 @@ class Register extends Component {
             <Form>
                 <h1>PERSONAL INFORMATION</h1>
                 <br></br>
-                <Form.Group controlId="formfName">
-                    <Form.Label>Frist name</Form.Label>
-                    <Form.Control type="fname" placeholder="Enter frist name" />
+                <Form.Group controlId="formTHName">
+                    <Form.Label>Thai name</Form.Label>
+                    <Form.Control type="thname" placeholder="Enter Thai name" onChange={this.handleChangeMemberTHname} />
                 </Form.Group>
 
-                <Form.Group controlId="formlName">
-                    <Form.Label>Lrist name</Form.Label>
-                    <Form.Control type="lname" placeholder="Enter lrist name" />
+                <Form.Group controlId="formENName">
+                    <Form.Label>English name</Form.Label>
+                    <Form.Control type="engname" placeholder="Enter English name" onChange={this.handleChangeMemberENname} />
                 </Form.Group>
 
-                <Form.Group controlId="formIdcard">
-                    <Form.Label>ID card</Form.Label>
-                    <Form.Control type="idcard" placeholder="Enter id card" />
-                </Form.Group>
-
+                <center>
                 {this.state.isSigndIn ? (
                     <span>
                         <h1>Signed In!</h1>
                         <h1>FaceBook: {firebase.auth().currentUser.displayName}</h1>
                         <h1>Email: {firebase.auth().currentUser.email}</h1>
                         <br></br>
-                        <img class="profile" alt="profile picture" src={firebase.auth().currentUser.photoURL + "?height=500"}/>
+                        <img alt="profile picture" src={firebase.auth().currentUser.photoURL + "?height=500"}/>
                     </span>
                 ) : (
                     <StyledFirebaseAuth
@@ -64,22 +115,25 @@ class Register extends Component {
                         firebaseAuth={firebase.auth()}
                     />
                 )}
+                </center>
+
+                <Form.Group controlId="formIDcard">
+                    <Form.Label>IDcard</Form.Label>
+                    <Form.Control type="idcard" placeholder="Enter ID Card" onChange={this.handleChangeMemberIDcard} />
+                </Form.Group>
 
                 <Form.Group controlId="formPhone">
                     <Form.Label>Phone</Form.Label>
-                    <Form.Control type="phone" placeholder="Enter phone" />
+                    <Form.Control type="phone" placeholder="Enter phone" onChange={this.handleChangeMemberPhone} />
                 </Form.Group>
 
                 <Form.Group controlId="formAddress">
                     <Form.Label>Address</Form.Label>
-                    <Form.Control type="address" placeholder="Enter address" />
+                    <Form.Control type="address" placeholder="Enter address" onChange={this.handleChangeMemberAddress} />
                 </Form.Group>
 
-                {/* <Form.Group controlId="formBasicChecbox">
-                    <Form.Check type="checkbox" label="Accept" />
-                </Form.Group> */}
                 <center>
-                <Button class="butt" variant="primary" type="Confirm">
+                <Button variant="primary" type="Confirm" className="Button" onClick={this.handleSubmit}>
                     Confirm
                 </Button>
                 </center>

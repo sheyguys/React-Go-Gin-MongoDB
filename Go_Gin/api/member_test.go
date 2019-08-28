@@ -68,7 +68,7 @@ func Test_MemberListHandler_Should_Be_MemberInfo(t *testing.T) {
 
 func Test_AddMemberHandler_Input_Member_Shoud_Be_Created(t *testing.T) {
 	expectedStatusCode := http.StatusCreated
-	member := []byte(`{"member_name_eng":"Topson Noland","member_name_th":"ท็อปสัน โนแลนด์","member_idcard":1449900795130,"member_phone":"0884167209",
+	member := []byte(`{"member_name_eng":"Topson Noland","member_name_th":"ท็อปสัน โนแลนด์","member_idcard":1234567891011,"member_phone":"0884167209",
 	"member_address":"Suranaree University","member_email":"b6020911@gmail.com","member_facebook":"Topson Allstars"}`)
 	request := httptest.NewRequest("POST", "/employee", bytes.NewBuffer(member))
 	writer := httptest.NewRecorder()
