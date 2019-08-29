@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import "./Register.css"
+import { BrowserRouter as Link } from 'react-router-dom';
 import { Button } from "react-bootstrap"
 import { Form } from "react-bootstrap"
 import firebase from "firebase"
@@ -78,7 +79,8 @@ class Register extends Component {
             body: JSON.stringify(Member), // data can be `string` or {object}!
         }).then(res => res.json())
             .then(response =>
-                console.log('Success:', JSON.stringify(Member))
+                console.log('Success:', JSON.stringify(Member)),
+                window.location='/result'
             )
             .catch(error => console.error('Error:', error));
             console.log("Data : ",Member)

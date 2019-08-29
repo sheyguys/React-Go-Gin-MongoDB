@@ -1,26 +1,44 @@
 import React, { Component } from "react"
 import { Form } from "react-bootstrap"
+import axios from 'axios';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+
 import "./Result.css"
 
 class Result extends Component {
-    state = {
-        members: []
-    };
+    constructor(prop) {
+        super(prop)
+
+        this.state = { row:[] }
+    }
 
     componentDidMount() {
-       fetch('http://localhost:8081/employee')
-        .then((response) => response.json())
-        .then((data) => {
-                const members = data;
-                this.setState({members});
-                console.log(data);
+        var Allmember = []
+        axios.get('http://localhost:8081/employee').then(response => {
+          console.log(response.data);
+          response.data.member.forEach(member => {
+            Allmember.push(member)
+          })
+          this.setState({ row : Allmember })
+        })
+        .catch(error => {
+          console.log(error);
         });
       }
+
+    // componentDidMount() {
+    //    fetch('http://localhost:8081/employee')
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //             const members = data;
+    //             this.setState({members});
+    //             console.log(data);
+    //     });
+    //   }
     render(){
         return (
             <div>
@@ -40,15 +58,15 @@ class Result extends Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {this.state.members.map(row => (
-                            <TableRow key={row.Member}>
-                                <TableCell >{row.member_name_eng}</TableCell>
-                                <TableCell >{row.member_name_th}</TableCell>
-                                <TableCell >{row.member_idcard}</TableCell>
-                                <TableCell >{row.member_phone}</TableCell>
-                                <TableCell >{row.member_address}</TableCell>
-                                <TableCell >{row.member_email}</TableCell>
-                                <TableCell >{row.member_facebook}</TableCell>
+                            {this.state.row.map(member => (
+                            <TableRow key={member.member_id}>
+                                <TableCell >{member.member_name_eng}</TableCell>
+                                <TableCell >{member.member_name_th}</TableCell>
+                                <TableCell >{member.member_idcard}</TableCell>
+                                <TableCell >{member.member_phone}</TableCell>
+                                <TableCell >{member.member_address}</TableCell>
+                                <TableCell >{member.member_email}</TableCell>
+                                <TableCell >{member.member_facebook}</TableCell>
                             </TableRow>
                             ))}
                         </TableBody>
