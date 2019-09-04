@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import "./Register.css"
-import { BrowserRouter as Link } from 'react-router-dom';
 import { Button } from "react-bootstrap"
 import { Form } from "react-bootstrap"
 import firebase from "firebase"
@@ -94,12 +93,12 @@ class Register extends Component {
                 <br></br>
                 <Form.Group controlId="formTHName">
                     <Form.Label>Thai name</Form.Label>
-                    <Form.Control type="thname" placeholder="Enter Thai name" onChange={this.handleChangeMemberTHname} />
+                    <Form.Control  required type="thname" placeholder="Enter Thai name" onChange={this.handleChangeMemberTHname} />
                 </Form.Group>
 
                 <Form.Group controlId="formENName">
                     <Form.Label>English name</Form.Label>
-                    <Form.Control type="engname" placeholder="Enter English name" onChange={this.handleChangeMemberENname} />
+                    <Form.Control  required type="engname" placeholder="Enter English name" onChange={this.handleChangeMemberENname} />
                 </Form.Group>
 
                 <center>

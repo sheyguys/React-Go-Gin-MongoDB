@@ -1,12 +1,13 @@
 import React, { Component } from "react"
 import { Form } from "react-bootstrap"
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-
+import { Button } from "react-bootstrap"
 import "./Result.css"
 
 class Result extends Component {
@@ -29,21 +30,18 @@ class Result extends Component {
           console.log(error);
         });
       }
+    
+    handleDelete(id){
+        axios.delete('http://localhost:8081/employee/'+id)
+        console.log(id);
+        window.location.reload();
+    }
 
-    // componentDidMount() {
-    //    fetch('http://localhost:8081/employee')
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //             const members = data;
-    //             this.setState({members});
-    //             console.log(data);
-    //     });
-    //   }
     render(){
         return (
             <div>
                 <Form>
-                    <h1>PERSONAL INFORMATION</h1>                
+                    <h1>EMPLOYEE RECORDS</h1>                
                     <br></br>
                     <Table>
                         <TableHead>
@@ -55,18 +53,20 @@ class Result extends Component {
                                 <TableCell>Address</TableCell>
                                 <TableCell>Email</TableCell>
                                 <TableCell>Facebook</TableCell>
+                                <TableCell>DELETE</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {this.state.row.map(member => (
                             <TableRow key={member.member_id}>
-                                <TableCell >{member.member_name_eng}</TableCell>
-                                <TableCell >{member.member_name_th}</TableCell>
-                                <TableCell >{member.member_idcard}</TableCell>
-                                <TableCell >{member.member_phone}</TableCell>
-                                <TableCell >{member.member_address}</TableCell>
-                                <TableCell >{member.member_email}</TableCell>
-                                <TableCell >{member.member_facebook}</TableCell>
+                                <TableCell>{member.member_name_eng}</TableCell>
+                                <TableCell>{member.member_name_th}</TableCell>
+                                <TableCell>{member.member_idcard}</TableCell>
+                                <TableCell>{member.member_phone}</TableCell>
+                                <TableCell>{member.member_address}</TableCell>
+                                <TableCell>{member.member_email}</TableCell>
+                                <TableCell>{member.member_facebook}</TableCell>
+                                <TableCell><Button variant="danger" onClick={() => this.handleDelete(member.member_id)}>DELETE</Button></TableCell>
                             </TableRow>
                             ))}
                         </TableBody>
