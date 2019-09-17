@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import { Form } from "react-bootstrap"
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -35,6 +34,7 @@ class Result extends Component {
         axios.delete('http://localhost:8081/employee/'+id)
         console.log(id);
         window.location.reload();
+        alert('Delete Complete!!');
     }
 
     render(){

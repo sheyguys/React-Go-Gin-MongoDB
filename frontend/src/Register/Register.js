@@ -83,6 +83,7 @@ class Register extends Component {
             )
             .catch(error => console.error('Error:', error));
             console.log("Data : ",Member)
+            alert('Post Complete!!');
     };
 
     render(){
