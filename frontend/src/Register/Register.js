@@ -79,11 +79,11 @@ class Register extends Component {
         }).then(res => res.json())
             .then(response =>
                 console.log('Success:', JSON.stringify(Member)),
-                window.location='/result'
             )
             .catch(error => console.error('Error:', error));
             console.log("Data : ",Member)
             alert('Post Complete!!');
+            window.location='/result'
     };
 
     render(){

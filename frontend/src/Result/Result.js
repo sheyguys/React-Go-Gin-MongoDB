@@ -33,8 +33,8 @@ class Result extends Component {
     handleDelete(id){
         axios.delete('http://localhost:8081/employee/'+id)
         console.log(id);
-        window.location.reload();
         alert('Delete Complete!!');
+        window.location.reload();
     }
 
     render(){
